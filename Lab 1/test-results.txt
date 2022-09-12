@@ -1,0 +1,6 @@
+**********10 lottery awards statistics **************
+# of awards    total awards    top         bottom  average   std       
+10             4588            1009        15      458.00    111.00    
+*****************************************************
+The awards in decreasing order:
+15 101 104 107 109 123 1005 1007 1008 1009 
