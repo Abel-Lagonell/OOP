@@ -1,43 +1,128 @@
   #include <iostream>
   #include <cmath>
+  #include <cstring>
+  #include <iomanip>
+
   using namespace std;
 
-double inAngle(double f, double n, double m){
-  double ang;
-  ang = acos((pow(n,2)+pow(m,2)-pow(f,2))/(2*n*m));
-  ang *= 180/M_PI;
-  return ang;
+
+double area (double n, double s){
+  double area = (n *pow(s,2))/(4*tan(M_PI/n));
+
+  return area;
 }
 
-double area(double a, double b, double c){
-  double s = (a+b+c)/2;
+#define POLYGONS	5 // currently only 5 triangles at most can be recorded
+double triangles[POLYGONS][3];
 
-  double area = sqrt(s*(s-a)*(s-b)*(s-c));
+void printrecords(const double triangles[][3], const int records) {
+	// print table header
+	cout << left // left align
+		<< setprecision(2)
+		<< showpoint
+		<< fixed;
+
+	cout << setw(12) << "Triangle#"
+		<< setw(10) << "n"
+		<< setw(10) << "s"
+		<< setw(10) << "Area"
+		<< endl;
+	// print each record
+	for (int i = 0; i < records; i++)
+	{
+
+		cout << setw(12) << i + 1; // "Polygon #"
+		for (int j = 0; j < 3; j++)
+		{
+			cout << setw(10) << triangles[i][j];
+		}
+		cout << endl;
+
+	}
 }
 
 int main(){
   
 
-  //Calculate the three internal angles and area
-  
-  double a,b,c; //3 sides of triangle
-  double A,B,C; //3 angles of triangle
-  bool legal = true;
+  double a, b, c; // 3 sides
+	double A, B, C; // 3 internal angles
 
-  do{
-    cout << "Triangle Guru!"<< endl;
-    cout << "Please input the sides of the triangle seperated by ENTER: " << endl;
-    cin >> a >> b >> c;
-      legal = a>0 && b>0 && c>0 && (a+b >c) && (a+c >b) && (c+b >a);
-  } while(!legal);
-  
-  A = inAngle(a,b,c);
-  B = inAngle(b,a,c);
-  C = inAngle(c,b,a);
-  
-  double tarea = area(a,b,c);
+	char cmd;
+	bool legal = true;
+	double tarea;
 
-  cout << "The area is: " << area << "\nWith the angles being: \n A:" << A << "\t B: " << B << "\tC: " << C << endl;
+	int triangle = 0, current = 0; // triangle index
+	int times = 0; // how many times played
+	int records = 0; // current number of records <= POLYGONS
+
+	cout << "Polygon Guru!" << endl;
+	cout << "==============" << endl;
+
+	while (true)
+	{
+		cout << "Please enter a command:";
+		cin >> cmd;
+		cout << endl;
+
+		switch (cmd)
+		{
+		case 'n':
+		case 'N':
+			do
+			{
+				
+				// 7. Add user inputand output
+				cout << "Please enter the number of sides and how long the sides are: ";
+					
+				cin >> a >> b;
+				cout << endl;
+				legal = (a > 0) && (b > 0);
+
+			} while (!legal);
+			// record the three sides of a triangle
+			triangles[triangle][0] = a;
+			triangles[triangle][1] = b;
+
+			// a trick to hold the current triangle
+			current = triangle;
+			// move to the next record, if it's full, wrap back from the beginning
+			triangle++;	
+			triangle %= POLYGONS;
+
+			times++;
+			records = (times < POLYGONS) ? times : POLYGONS;
+
+			break;
+		case 'a':
+		case 'A':
+			tarea = area(a,b);
+			cout << "The area: " << tarea << endl;
+			// record the result
+			triangles[current][2] = tarea;
+			break;
+		case 'p':
+		case 'P': // print out the records
+			printrecords(triangles, records);
+			break;
+		case 'q':
+		case 'Q':
+			cout << "Are you sure you want to quit?(Y/N):" ;
+			while (true)
+			{
+				cin >> cmd;
+				cout << endl;
+				if (cmd == 'Y' || cmd == 'y')
+					return 1;
+				else
+					break;
+			}
+			
+			break;
+		default:
+			break;
+		}
+
+	}
 
   return 0;
 }
