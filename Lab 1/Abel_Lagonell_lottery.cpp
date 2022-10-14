@@ -330,6 +330,7 @@ void DoAwardStatistics() {
     for (int i =0; i < records; i++){
         sum += gPlayerAward[i];
     }
+	average = (sum*1.0)/records;
 
 	// END OF TODO 3.=============================================
 
@@ -337,7 +338,6 @@ void DoAwardStatistics() {
 	// TODO 4. ===================================================
 	// find the std of gPlayerAward
 
-    average = (sum*1.0)/records;
     for (int i =0; i < records; i++){
         std += pow((gPlayerAward[i]-average),2);
     }
