@@ -3,8 +3,8 @@
  * Author               Abel Lagonell
  * Email:               alagonell@floridapoly.edu
  * Version:             0.0.2a
- * Creation date:       10/17/2022 @ 11:00 PM
- * Modification Date:   10/17/2022 @ 12:49 PM
+ * Creation date:       10/19/2022 @ 11:00 AM
+ * Modification Date:   10/19/2022 @ 12:49 PM
  * Description:         Make a class to add different complex numbers
 */
 
