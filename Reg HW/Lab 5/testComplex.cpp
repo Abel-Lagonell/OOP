@@ -25,13 +25,13 @@ int main(){
 
     Complex comp3 = Complex();
 
-    comp3 = COMPLEX_H::additionTwo(comp1,comp2);
+    comp3 = Complex::additionTwo(comp1,comp2);
     comp3.printComplex();
 
     Complex comp4[] = {Complex(1,1), Complex(2,2), Complex(3,3), Complex(4,4)};
     Complex comp5 = Complex();
 
-    comp5 = COMPLEX_H::additionArray(comp4, 4);
+    comp5 = Complex::additionArray(comp4, 4);
     comp5.printComplex();
     
 
