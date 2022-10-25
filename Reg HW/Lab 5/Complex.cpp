@@ -1,4 +1,4 @@
-#include "Complex.hpp"
+#include "Complex.h"
 #include <iostream>
 
 using namespace std;
@@ -23,7 +23,10 @@ void Complex::setImg(double newImg) { img = newImg; }
 
 //Printing of only the complex number
 void Complex::printComplex(){
-    cout << real << ((img>0)? "+":"") << img <<"i"; 
+    if(img!=0)
+        cout << real << ((img>0)? "+":"") << img <<"i"; 
+    else 
+        cout << real;
 }
 
 //Complex number addition as defined within the class
