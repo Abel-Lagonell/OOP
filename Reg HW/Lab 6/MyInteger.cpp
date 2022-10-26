@@ -1,4 +1,4 @@
-#include "MyInteger.hpp"
+#include "MyInteger.h"
 #include <iostream>
 
 using namespace std;
