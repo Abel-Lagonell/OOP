@@ -78,16 +78,16 @@ public:
     double operator[](int index) {return ((index==0)? getRealPart():((index ==1)? getImaginaryPart():0));}
     
     //addative and subtractive suffix and prefix
-    Complex& operator++() {return *this = add(Complex(1));}
-    Complex& operator--() {return *this = add(Complex(-1));}
+    Complex operator++() {return *this+=Complex(1);}
+    Complex operator--() {return *this+=Complex(-1);}
     Complex& operator++(int dummy) {
         Complex temp(getRealPart(),getImaginaryPart());
-        *this = add(Complex(1));
+        *this += Complex(1);
         return temp;
     }
     Complex& operator--(int dummy) {
         Complex temp(getRealPart(),getImaginaryPart());
-        *this = add(Complex(-1));
+        *this += Complex(-1);
         return temp;
     }
     
@@ -174,11 +174,11 @@ int main(){
         "cx1 = " << cx1 << endl <<
         "++cx1; cx1 = " << ++cx1 << endl <<
         "--cx1; cx1 = " << --cx1 << endl <<
-        /*"5.2 Test overloaded postfixes ++,--:" << endl <<
+        "5.2 Test overloaded postfixes ++,--:" << endl <<
         "cx1 = " << cx1 << endl <<
         "\'cout << cx1++;\' prints " << cx1++ << endl <<
-        "\'cout << cx1++;\' prints " << cx1-- << endl <<
-        "cx1 = " << cx1 << endl << endl <<*/
+        "\'cout << cx1--;\' prints " << cx1-- << endl <<
+        "cx1 = " << cx1 << endl << endl <<
         "6. Test overloaded subscript operator []:" << endl <<
         "cx1 = " << cx1 << endl <<
         "cx1[0] = " << cx1[0] << endl <<
