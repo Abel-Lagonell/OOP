@@ -14,10 +14,11 @@
 using namespace std;
 
 class Complex{
-public:
+private:
     //Priv variables
-    double real=0, img=0;
+    double real, img;
 
+public:
     //Constructors
     Complex(double a, double b);
     Complex(double a);
@@ -30,23 +31,23 @@ public:
     //Gives the complex number as a string
     string toString() const {
         if (getImaginaryPart() == 0)
-            return ((getRealPart()>0)? "":"- ") + to_string(std::abs(getRealPart()));
+            return ((getRealPart()>=0)? "":"- ") + to_string(std::abs(getRealPart()));
         else
-            return ((getRealPart()>0)? "":"- ") + to_string(std::abs(getRealPart())) + ((getImaginaryPart()>0)? " + ":" - ") + to_string(std::abs(getImaginaryPart())) + "i";
+            return ((getRealPart()>=0)? "":"- ") + to_string(std::abs(getRealPart())) + ((getImaginaryPart()>0)? " + ":" - ") + to_string(std::abs(getImaginaryPart())) + "i";
     }
     
     //normal math functions
-    Complex add(const Complex& a) const {
+    Complex add(const Complex a) const {
         double r = getRealPart() + a.getRealPart();
         double i = getImaginaryPart() + a.getImaginaryPart();
         return Complex(r,i);
     }
-    Complex subtract(const Complex& a) const{
+    Complex subtract(const Complex a) const{
         double r = getRealPart() - a.getRealPart();
         double i = getImaginaryPart() - a.getImaginaryPart();
         return Complex(r,i);
     }
-    Complex multiply(const Complex& x) const{
+    Complex multiply(const Complex x) const{
         double a = getRealPart();
         double b = getImaginaryPart();
         double c = x.getRealPart();
@@ -55,13 +56,13 @@ public:
         double i = b*c + a*d;
         return Complex(r,i);
     }
-    Complex divide(const Complex& x) const{
+    Complex divide(const Complex x) const{
         double a = getRealPart();
         double b = getImaginaryPart();
         double c = x.getRealPart();
         double d = x.getImaginaryPart();
-        double r = (a*c - b*d)/(pow(c,2)+pow(d,2));
-        double i = (b*c + a*d)/(pow(c,2)+pow(d,2));
+        double r = (a*c + b*d)/(pow(c,2)+pow(d,2));
+        double i = (b*c - a*d)/(pow(c,2)+pow(d,2));
         return Complex(r,i);
     }
     double abs(){
@@ -69,26 +70,32 @@ public:
     }
     
     //assignment math operators
-    Complex& operator+=(const Complex& a) {return *this = add(a);}
-    Complex& operator-=(const Complex& a) {return *this = subtract(a);}
-    Complex& operator*=(const Complex& a) {return *this = multiply(a);}
-    Complex& operator/=(const Complex& a) {return *this = divide(a);}
+    Complex& operator+=(const Complex a) {return *this = add(a);}
+    Complex& operator-=(const Complex a) {return *this = subtract(a);}
+    Complex& operator*=(const Complex a) {return *this = multiply(a);}
+    Complex& operator/=(const Complex a) {return *this = divide(a);}
     
     //Index operator
     double operator[](int index) {return ((index==0)? getRealPart():((index ==1)? getImaginaryPart():0));}
     
     //addative and subtractive suffix and prefix
-    Complex operator++() {return *this+=Complex(1);}
-    Complex operator--() {return *this+=Complex(-1);}
-    Complex& operator++(int dummy) {
+    Complex operator++(int dummy) {
         Complex temp(getRealPart(),getImaginaryPart());
         *this += Complex(1);
         return temp;
     }
-    Complex& operator--(int dummy) {
+    Complex operator--(int dummy) {
         Complex temp(getRealPart(),getImaginaryPart());
         *this += Complex(-1);
         return temp;
+    }
+    Complex operator++() {
+        *this += Complex(1);
+        return *this;
+    }
+    Complex operator--() {
+        *this -= Complex(1);
+        return *this;
     }
     
     //Change of sign
@@ -97,13 +104,15 @@ public:
 };
 
 //in and out operator
-ostream& operator<<(ostream& out, const Complex& a){
+ostream& operator<<(ostream& out, const Complex a){
     cout << a.toString();
     return out;
 }
 istream& operator>>(istream& in, Complex& a){
+    double r,i;
     cout << "Enter number a and b for (a + bi): ";
-    cin >> a.real >> a.img;
+    cin >> r >> i;
+    a = Complex(r,i);
     return in;
 }
 
@@ -124,7 +133,7 @@ int main(){
     Complex c0 = Complex();
     Complex c1, c2, cx1, cx2;
     
-    cout << 
+    cout <<
         "1. Test constructors: " << endl <<
         "1.1 Create a complex number c0 with no-arg constructor Complex(): " << endl <<
         "c0 = " << c0 << ", its the real part Re(c0) = " << c0.getRealPart() << ", its imaginary part Im(c0) = " << c0.getImaginaryPart() << ", its absolute value |c0| = " << c0.abs() << endl <<
