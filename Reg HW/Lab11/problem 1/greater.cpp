@@ -22,7 +22,7 @@ bool isGreater(const T list1 [], const T list2 [], int size1, int size2){
 			b=list2[i];
 
 	cout << a << " " << b << endl;
-	return ((size1 == size2)? (a > b):false);
+	return (a > b);
 }
 
 int main(){
