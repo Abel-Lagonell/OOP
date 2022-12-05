@@ -20,8 +20,6 @@ bool isGreater(const T list1 [], const T list2 [], int size1, int size2){
 	for (int i = 1; i < size2; i++)
 		if (list2[i] > b)
 			b=list2[i];
-
-	cout << a << " " << b << endl;
 	return (a > b);
 }
 
@@ -35,7 +33,7 @@ int main(){
 	;
 	string e[] = {"Miami","Lakeland","Tampa","Orlando"};
 	string f[] = {"Dallas","Austin","Antonia"};
-	cout << "{\"Miami\",\"Lakeland\",\"Tampa\",\"Orlando\"} > {\"Dallas\",\"Austin\",\"Antonia\"}? " << isGreater<string> (e,f,4,3);
+	cout << "{\"Miami\",\"Lakeland\",\"Tampa\",\"Orlando\"} > {\"Dallas\",\"Austin\",\"Antonia\"}? " << isGreater<string> (e,f,4,3) << endl;
 
 
     return 0;

@@ -28,7 +28,7 @@ int main(){
     cout << "s2.isEqualTo(s1) = " << s2.isEqualTo(s1) << endl <<
     "8) Creates a third MySet object s3 with the copy constructor with the first object as the argument" << endl <<
     "s3 = "; MySet s3 = MySet(s1); s3.printSet();
-    cout << "s3.isEqualTo(s1) = " << s3.isEqualTo(s1); 
+    cout << "s3.isEqualTo(s1) = " << s3.isEqualTo(s1) <<endl; 
 
     return 0;
 }
